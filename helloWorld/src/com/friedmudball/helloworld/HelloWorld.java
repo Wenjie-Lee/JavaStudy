@@ -1,7 +1,8 @@
+package com.friedmudball.helloworld;
 
 public class HelloWorld {
 
-    public static void main(String[] args) throws Exception {
+    public HelloWorld() {
         System.out.println("Hello World!");
     }
 }
