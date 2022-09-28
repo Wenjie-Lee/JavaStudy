@@ -1,6 +1,6 @@
 
 import java.lang.String;
-import java.util.Objects;
+import java.lang.StringBuilder;
 
 public class Main {
 
@@ -75,14 +75,34 @@ public class Main {
         String[] splited = s1.split("b");
     }
 
+    public static void StringIntern() {
+        // 编译器优化 创建了"xyzuvw"常量
+        // s.intern()没做任何事
+        String s = new StringBuilder().append("xyz").append("uvw").toString();
+        System.out.println(s == s.intern());    // true
+
+        String s3 = new String("123") + new String("456");  // 编译后也是采用StringBuilder
+        String s4 = "123456";
+        System.out.println(s3 == s4);           // false s3指向堆中对象，s4指向常量池
+        System.out.println(s3.intern() == s4);  // true .intern()返回了常量池中的"123456"
+    }
+
+    static void change(String str) {
+        str = "456";
+    }
+
     public static void main(String[] args) {
 
-        StringInstantiate();
+//        StringInstantiate();
+//
+//        StringReference();
+//
+//        StringEqual();
+        StringIntern();
 
-        StringReference();
-
-        StringEqual();
-
+        String a = "123";
+        change(a);
+        System.out.println(a);
 
     }
 }

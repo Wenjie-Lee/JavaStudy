@@ -42,3 +42,6 @@ String s3 = new String()"aaa";  // s3 != s1
 // if 常量池中有"aaa"， 则直接在堆内存中复制一个对象，返回引用地址；否则先在池中创建，然后再在堆中复制创建一个
 
 ```
+
+### String Operator +
+> https://docs.oracle.com/javase/specs/jls/se19/html/jls-15.html#jls-15.18.1
