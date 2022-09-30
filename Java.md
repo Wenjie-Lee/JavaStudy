@@ -137,3 +137,116 @@ public class ToolClass {
 `final`， `abstract`共同用于构造抽象类，并为要继承抽象类的子类们提供一些方法，
 - 有些方法用`abstract`修饰，表示该方法的具体实现由各个子类自己决定，
 - 有些方法用`final`修饰，并给出方法体，表示这应该是子类们都要遵循的模板方法，且不能由子类随便修改
+
+## interface
+接口默认`public`，用于规范实现类，必须重写接口中声明的方法
+- 同`abstract`一样不能创建实例对象
+- JDK8之前，只能声明常量、抽象类
+- JDK9，允许在接口中声明带方法体的方法
+```java
+public interface ImyInterface {
+    // public static final 可省略，编译器会自动补上
+    public static final double pai = 3.14;
+    // public abstract 可省略
+    public abstract int myFunc(int param);
+    // default 
+    default void defaultFunc(int param) {
+        System.out.println("默认方法");
+        privateFunc(3);
+    }
+    // public static 在子类中只能通过`ImyInterface.staticFunc`调用
+    static void staticFunc(int param) {
+      System.out.println("静态方法");
+    }
+    // private 只能在本接口内被其他默认方法、私有方法调用
+    private void privateFunc(int param) {
+      System.out.println("默认方法");
+    }
+}
+```
+接口是用来被实现的`implements`，实现类可理解为子类
+- 一个类可以实现多个接口，多个接口冲突的方法可以直接被实现类重写
+- 接口之间可以多继承，实现规范合并。多个接口存在规范冲突则不能被同时继承
+
+## polymorphic
+多态，指执行一个对象的方法，会有不同的表现
+- 对于变量，统一指向父类中的同名变量，编译看声明，运行也与声明统一
+- 对于方法，调用子类的不同实现，运行看实例对象
+```java
+abstract class Animal {         // 抽象父类
+    String category = "animal";
+    abstract void run();
+}
+class Dog extends Animal {
+    String category = "dog";
+    @Override
+    public void run() {
+      System.out.println(category + " run.");
+    }
+    public void bark() {
+      System.out.println(category + " bark.");
+    }
+}
+class Cat extends Animal {
+    String category = "cat";
+    @Override
+    public void run() {
+      System.out.println(category + " run.");
+    }
+    public void meow() {
+      System.out.println(category + " meow.");
+    }
+}
+class Test {
+    public static void main(String[] args) {
+        Animal a = new Dog();               // polymorphic state an Animal, but give a Dog
+        System.out.println(a.category);     // animal
+        a.run();                            // dog run.
+        Anima b = new Cat();
+        System.out.println(a.category);     // animal
+        b.run();                            // cat run.
+
+    }
+}
+```
+多态实现中，只能调用父类的方法，不能调用子类独有的方法
+```java
+class Test {
+    public static void main(String[] args) {
+        Animal a = new Dog();  // auto type conversion
+        Animal b = new Cat();
+        // a.bark();     can`t work
+        // b.meow();     can`t work
+        Dog dog = (Dog)a;   // forced type conversion
+        dog.bark();     // can work
+        Cat cat = (Cat)b;
+        cat.meow();     // can work
+        // Dog catDog = (Dog) cat; cause ClassCastException 
+    }
+}
+```
+
+## anonymous class
+匿名内部类
+```java
+class AnonymousClass {
+    // Comparator<T> 在 = 右边创建了一个匿名类，我们不知道它的类签名是什么
+    // 这个匿名类，是Comparator<T> 接口的实现类
+    // 虽然没有名字，但在编译后会产生一个 AnonymousClass$1.class 的文件，1表示它是第一个匿名类
+    // 这里实现了 Comparator<T> 的比较函数
+    Comparator<T> comparator = new Comparator<T>() {
+        @Override
+        public int compare(T o1, T o2) {
+            for (int i = 0; i < o1.size(); i++) {
+                if (o1.get(i).compareTo(o2.get(i)) > 0)
+                    return 1;
+                else if (o1.get(i).compareTo(o2.get(i)) < 0)
+                    return -1;
+            }
+            return 0;
+        }
+    };
+}
+
+```
+

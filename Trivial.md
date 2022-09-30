@@ -45,3 +45,19 @@ String s3 = new String()"aaa";  // s3 != s1
 
 ### String Operator +
 > https://docs.oracle.com/javase/specs/jls/se19/html/jls-15.html#jls-15.18.1
+
+## 日期相关
+| 类名                 | 描述         |
+|--------------------|------------|
+| `Date`             | 日期时间       |
+| `SimpleDateFormat` | 格式化工具      |
+| `Calendar`         | 日历         |
+| **JDK8新增**         | ---        |
+| `LocalTime`        | 只包含时间      |
+| `LocalDate`        | 只包含日期      |
+| `LocalDateTime`    | 包含时间和日期    |
+| `Instant`          | 时间戳        |
+| `DateTimeFormat`   | 日期格式化工具    |
+| `Duration`         | 计算两个“时间”间隔 |
+| `Period`           | 计算两个“日期”间隔 |
+
