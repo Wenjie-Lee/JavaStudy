@@ -23,3 +23,4 @@ public class Main {
         System.out.println(s2 == s2.intern());  // false
     }
 }
+
