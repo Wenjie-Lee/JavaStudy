@@ -6,18 +6,21 @@
  * @date: 2022/9/29 14:53
  */
 class Singleton3 {
-    private static Singleton3 singleton3 = null;
-    private static final Object syncObj = new Object();
+    private static volatile Singleton3 instance = null;
     private Singleton3() {}
 
-    public static Singleton3 getSingleton3() {
-        if (singleton3 == null) {
-            synchronized(syncObj) {
-                if (singleton3 == null) {
-                    singleton3 = new Singleton3();
+    public static Singleton3 getInstance() {
+        // DCL ,Double-Checked Locking
+        if (instance == null) {
+            synchronized (Singleton3.class) {
+                // cus do not guarantee atomic
+                // and 'singleton3 = new Singleton3();' is not a atomic operation, no data-dependency exists
+                // instance should be volatile to prohibit the 'Instruction rearrangement'
+                if (instance == null) {
+                    instance = new Singleton3();
                 }
             }
         }
-        return singleton3;
+        return instance;
     }
 }

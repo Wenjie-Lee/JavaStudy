@@ -247,6 +247,34 @@ class AnonymousClass {
         }
     };
 }
-
 ```
 
+## lambda 表达式
+lambda 表达式只能简化**函数式接口**的匿名内部类的写法
+- 函数式接口，是一种仅有一个抽象方法的接口
+- 对函数式接口，我们加上一个`@FunctionalInterface`注解，标记该接口必须满足函数式接口定义
+
+```java
+class LambdaExpression {
+    public static void main(String[] args) {
+        MyInterface i1 = new MyInterface() {    // notified as can be replaced by lambda
+            @Override
+            public void run() {
+                System.out.println("a override interface run method");
+            }
+        };
+        MyInterface i2 = () -> 
+            System.out.println("a override interface run method using lambda");
+    }
+}
+@FunctionalInterface
+interface MyInterface { // a functional interface
+    void run() {
+        System.out.println("interface run method");
+    }
+}
+```
+
+## Regex
+正则表达式
+> https://docs.oracle.com/en/java/javase/19/docs/api/java.base/java/util/regex/Pattern.html
