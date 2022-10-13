@@ -1,6 +1,12 @@
-*.jar
+#*.jar
 *.iml
 
+# log
+*.log
+*.log*
+*.zip
+
 # Intellif
+/.lh/
 /.idea/
 /out/
