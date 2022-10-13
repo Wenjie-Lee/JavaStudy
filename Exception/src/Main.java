@@ -13,7 +13,10 @@
  */
 public class Main {
 
-
+    public static void throwException(String s) throws Exception {
+        System.out.println("输出给定String的长度:");
+        System.out.println(s.length());
+    }
 
     public static void main(String[] args) {
         int[] a = new int[2];
@@ -36,6 +39,17 @@ public class Main {
             System.out.println(3/0);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        // throws + try/catch
+        String s = null;
+        try {
+            throwException(s);
+        } catch (Exception e) {
+            System.out.println("get Exception:");
+            e.printStackTrace();
+        } finally {
+            System.out.println("若程序没有因Exception导致JVM退出，则能看到这一条");
         }
     }
 }
