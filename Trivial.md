@@ -61,7 +61,7 @@ String s3 = new String()"aaa";  // s3 != s1
 | `Duration`         | 计算两个“时间”间隔 |
 | `Period`           | 计算两个“日期”间隔 |
 
-## 关键字 `volatile` vs `Synchronized` vs 'static'
+## 关键字 `volatile` vs `Synchronized` vs `static`
 有关线程安全的几个特性：原子性、可见性、有序性
 
 | 关键字            | 原子性 | 可见性 | 有序性 | 修饰变量 | 修饰方法 | 修饰类 |
@@ -81,3 +81,5 @@ String s3 = new String()"aaa";  // s3 != s1
    - `static`，无原子性
 3. 有序性
    - 都保证有序性。由于数据依赖关系，即不能被编译器、处理器进行指令重排优化
+
+## 锁、锁的种类、锁升级
